@@ -1,0 +1,159 @@
+@import '../../styles/_breakpoint';
+@import '../../styles/_mixin';
+.left, .right {
+  width: 50%;
+  position: relative;
+  height: 100vh;
+  @include mq(vertical) {
+    float: none;
+    height: 50vh;
+    width: 100%;
+  }
+}
+.left {
+  float: left;
+  background: #fbd45b;
+  .logo {
+    width: 150px;
+    margin: auto;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 150px;
+    border-radius: 200px;
+    padding: 35px 0;
+    .logoBx {
+      text-align: center;
+    }
+    p {
+      color: #fff;
+      text-align: center;
+      margin: 4px 0 0 0;
+      font-size: 19px;
+      font-weight: bold;
+    }
+  }
+}
+.right {
+  float: right;
+  .loginBx,.signUpBx {
+    width: 300px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    @include mq(pc) {
+      height: fit-content;
+      height: -moz-fit-content;
+    }
+    @include mq(tab) {
+      height: fit-content;
+      height: -moz-fit-content;
+    }
+    @include mq(sp) {
+      width: 80%;
+      padding: 5% 0;
+      box-sizing: border-box;
+      @include mq(beside) {
+        height: fit-content;
+        height: -moz-fit-content;
+      }
+      @include mq(vertical) {
+        height: auto;
+      }
+    }
+    div {
+      width: 100%;
+      margin-bottom: 5px;
+    }
+    h1 {
+      color: #fbd45b;
+      margin: 0 0 15px 0;
+    }
+    button {
+      background: #fbd45b;
+      border: 0;
+      color: #fff;
+      font-weight: bold;
+      width: 100%;
+      padding: 10px 0 9px;
+      font-size: 17px;
+      border-radius: 3px;
+      &:hover {
+        opacity: 0.7;
+        cursor: pointer;
+      }
+    }
+    p {
+      margin: 6px 0 0 0;
+      font-size: 12px;
+      text-align: center;
+      color: #fbd45b;
+      font-weight: bold;
+      &:hover {
+        opacity: 0.7;
+        cursor: pointer;
+      }
+    }
+    span {
+      color: rgba(255, 0, 0, 0.786);
+      font-size: 12px;
+      margin: -10px 0 10px;
+      display: block;
+      font-weight: bold;
+    }
+  }
+  .loginBx a {
+    padding-bottom: 5%;
+    display: block;
+    box-sizing: border-box;
+  }
+  .signUpBx {
+    @include mq(pc) {
+      height: fit-content;
+      height: -moz-fit-content;
+    }
+    @include mq(tab) {
+      height: fit-content;
+      height: -moz-fit-content;
+    }
+    @include mq(sp) {
+      padding: 5% 0;
+      box-sizing: border-box;
+      @include mq(beside) {
+        height: fit-content;
+        height: -moz-fit-content;
+      }
+      @include mq(vertical) {
+        height: auto;
+      }
+    }
+    a {
+      padding-bottom: 5%;
+      display: block;
+      box-sizing: border-box;
+    }
+  }
+  .inputBx {
+    width: 100%;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;border-radius: 3px;
+    font-size: 16px;
+    @include mq(pc) {
+      padding: 10px;
+    }
+    @include mq(tab) {
+      padding: 10px;
+    }
+    @include mq(sp) {
+      height: fit-content;
+      height: -moz-fit-content;
+      padding: 10px 12px;
+      box-sizing: border-box;
+    }
+  }
+}

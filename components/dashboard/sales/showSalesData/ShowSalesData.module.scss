@@ -1,0 +1,130 @@
+@import '../../../../styles/_breakpoint';
+@import '../../../../styles/mixin';
+@import '../../../../styles/main';
+
+.salesBxInner {
+    width: 100%;
+    margin-bottom: 2.5%;
+    .salesGrid {
+      overflow: hidden;
+      @include mq(sp) {
+        margin-bottom:10%;
+      }
+      .SalesProductList {
+        @include mq(pc) {
+          float: left;
+          width: 48.5%;
+        }
+        @include mq(tab) {
+          float: left;
+          width: 48.5%;
+        }
+        @include mq(sp) {
+          float: none;
+          width: 100%;
+          margin-bottom:10%;
+        }
+        h3 {
+          color: rgb(88, 82, 128);
+          font-size: 18px;
+          margin: 0;
+          border-bottom: 1px dashed $backgroundMainColor;
+          padding: 0 0 4px 0;
+          box-sizing: border-box;
+        }
+        ul {
+          padding: 0;
+          list-style: none;
+          width: 100%;
+          li {
+            border-bottom: 1px dashed #ddd;
+            padding-bottom: 10px;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            margin-top: 10px;
+            position: relative;
+            .quantityBx {
+              position: absolute;
+              right: 0;
+            }
+          }
+          li span.ranking {
+            color: #fff;
+            width: 23px;
+            display: inline-block;
+            height: 23px;
+            border-radius: 50px;
+            text-align: center;
+            font-weight: bold;
+          }
+          li:nth-of-type(1) {
+            .ranking {
+              background: rgb(255, 99, 132);
+            }
+          }
+          li:nth-of-type(2) {
+            .ranking {
+              background: rgb(255, 159, 64);
+            }
+          }
+          li:nth-of-type(3) {
+            .ranking {
+              background: rgb(255, 205, 86);
+            }
+          }
+          li:nth-of-type(4) {
+            .ranking {
+              background: rgb(75, 192, 192);
+            }
+          }
+          li:nth-of-type(5) {
+            .ranking {
+              background: rgb(54, 162, 235);
+            }
+          }
+        }
+        .moreBtn {
+          background: rgb(75, 192, 192);
+          color: #fff;
+          font-weight: bold;
+          text-align: center;
+          width: 200px;
+          padding: 7px 0 8px;
+          box-sizing: border-box;
+          border-radius: 5px;
+          border: none;
+          display: block;
+          font-size: 14px;
+          @include mq(pc) {
+            margin: 15px auto 0 auto;
+          }
+          @include mq(tab) {
+            margin: 10px auto 0 auto;
+          }
+          @include mq(sp) {
+            margin: 10px auto 0 auto;
+          }
+          &:hover {
+            opacity: 0.7;
+            cursor: pointer;
+          }
+        }
+      }
+      .SalesChart {
+        @include mq(pc) {
+          float: right;
+          width: 47%;
+        }
+        @include mq(tab) {
+          float: right;
+          width: 47%;
+        }
+        @include mq(sp) {
+          float: none;
+          width: 70%;
+          margin: 0 auto;
+        }
+      }
+    }
+  }

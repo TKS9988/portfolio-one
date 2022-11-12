@@ -1,0 +1,80 @@
+@import '../../../styles/_breakpoint';
+@import '../../../styles/_mixin';
+
+.sidebar {
+  height: 100vh;
+  background: rgb(248, 248, 248);
+  color: rgb(88, 82, 128);
+  box-sizing: border-box;
+  float: left;
+  font-size: 15px;
+  margin: 0;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  box-sizing: border-box;
+  @include mq(pc) {
+    width: 15%;
+    padding: 20px;
+  }
+  @include mq(tab) {
+    width: 8%;
+    padding: 20px 0 0 0;
+  }
+  @include mq(sp) {
+    width: 45px;
+    padding: 0;
+  }
+  li {
+    list-style: none;
+    font-weight: bold;
+    margin-bottom: 15px;
+    a {
+      padding: 6% 0;
+      width: 100%;
+      @include mq(pc) {
+        display: flex;
+      }
+      @include mq(tab) {
+        display: block;
+      }
+      @include mq(sp) {
+        display: block;
+      }
+    }
+    svg {
+      display: block;
+      @include mq(pc) {
+        margin-right: 10px;
+      }
+      @include mq(tab) {
+        width: 100%;
+      }
+      @include mq(sp) {
+        margin: 0 auto;
+        text-align: center;
+        width: 100%;
+      }
+    }
+    p {
+      line-height: 22px;
+      margin: 0;
+      @include mq(tab) {
+        display: none;
+      }
+      @include mq(sp) {
+        display: none;
+      }
+    }
+    &:hover {
+      opacity: 0.7;
+      cursor: pointer;
+    }
+  }
+  @include mq(sp) {
+    li:first-child {
+      margin-top: 20px;
+    }
+  }
+}

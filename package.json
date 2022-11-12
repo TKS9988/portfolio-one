@@ -9,12 +9,34 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@dnd-kit/core": "^6.0.5",
+    "@dnd-kit/sortable": "^7.0.1",
+    "@emotion/react": "^11.10.4",
+    "@emotion/styled": "^11.10.4",
+    "@mui/icons-material": "^5.10.3",
+    "@mui/material": "^5.10.5",
+    "@stripe/react-stripe-js": "^1.10.0",
+    "@stripe/stripe-js": "^1.36.0",
+    "@types/node": "^18.7.16",
+    "@types/react": "^18.0.19",
+    "chart.js": "^3.9.1",
+    "chartjs-plugin-doughnut-innertext": "^3.1.0",
+    "firebase": "^9.9.4",
+    "image-validator": "^1.2.1",
     "next": "12.3.0",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-beautiful-dnd": "^13.1.1",
+    "react-chartjs-2": "^4.3.1",
+    "react-dom": "18.2.0",
+    "react-firebase-hooks": "^5.0.3",
+    "react-loading-icons": "^1.1.0",
+    "sass": "^1.54.9",
+    "stripe": "^10.10.0",
+    "typescript": "^4.8.3"
   },
   "devDependencies": {
     "eslint": "8.23.0",
-    "eslint-config-next": "12.3.0"
+    "eslint-config-next": "12.3.0",
+    "eslint-config-prettier": "^8.5.0"
   }
 }

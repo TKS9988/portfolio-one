@@ -1,0 +1,41 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /user/{userId} {
+      allow read: if request.auth.uid != null;
+      allow create;
+      allow update: if request.auth.uid == userId;
+      allow delete: if request.auth.uid == userId;
+    }
+    match /category/{document=**} {
+      allow read;
+      allow create: if request.auth.uid != null;
+      allow update: if request.auth.uid != null;
+      allow delete: if request.auth.uid != null;
+    }
+    match /monthTotalPrice/{document=**} {
+      allow read;
+      allow create: if request.auth.uid != null;
+      allow update: if request.auth.uid != null;
+      allow delete: if request.auth.uid != null;
+    }
+    match /order/{document=**} {
+      allow read: if request.auth.uid != null;
+      allow create;
+      allow update: if request.auth.uid != null;
+      allow delete: if request.auth.uid != null;
+    }
+    match /sales/{document=**} {
+      allow read;
+      allow create: if request.auth.uid != null;
+      allow update: if request.auth.uid != null;
+      allow delete: if request.auth.uid != null;
+    }
+    match /menu/{document=**} {
+      allow read;
+      allow create: if request.auth.uid != null;
+      allow update: if request.auth.uid != null;
+      allow delete: if request.auth.uid != null;
+    }
+  }
+}

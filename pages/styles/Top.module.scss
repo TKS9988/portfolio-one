@@ -1,0 +1,203 @@
+@import '../../styles/_mixin';
+@import '../../styles/main';
+@import '../../styles/_breakpoint';
+.header {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  overflow: hidden;
+  padding: 10px 15px;
+  box-sizing: border-box;
+  z-index: 9999;
+  .logoBx {
+    float: left;
+    padding: 9px 9px 5px;
+    box-sizing: border-box;
+    width: 51px;
+  }
+  .toCart {
+    float: right;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 25px;
+    p {
+      color: #fff;
+      margin: 0;
+      font-size: 14px;
+      font-weight: bold;
+    }
+    .cartIcon {
+      width: 30px;
+      height: 30px;
+      color: #111;
+    }
+  }
+}
+.headerMove {
+  background: rgba(255, 255, 255, 0.5);
+  padding: 10px 15px;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  overflow: hidden;
+  box-sizing: border-box;
+  z-index: 999;
+  .logoBx {
+    float: left;
+    padding: 9px 9px 5px;
+    box-sizing: border-box;
+    width: 51px;
+  }
+  .toCart {
+    float: right;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 25px;
+    .cartIcon {
+      width: 30px;
+      height: 30px;
+      color: #111;
+    }
+  }
+}
+.kv {
+  width: 100%;
+  overflow: hidden;
+  .left {
+    float: left;
+    width: 50%;
+    height: 100vh;
+    position: relative;
+    .copyBx {
+      position: absolute;
+      z-index: 999;
+      @include mq(pc) {
+        top: 50%;
+        left: 35%;
+        transform: translateY(-50%) translateX(-50%);
+        -webkit-transform: translateY(-50%) translateX(-50%);
+      }
+      @include mq(tab) {
+        width: 185%;
+        bottom: 50px;
+        left: 50px;
+        @include mq(beside) {
+          bottom: 20px;
+          left: 20px;
+        }
+      }
+      @include mq(sp) {
+        width: 185%;
+        bottom: 20px;
+        left: 20px;
+      }
+      h1 {
+        letter-spacing: 0.2rem;
+        margin: 0;
+        font-family: 'Paytone One', sans-serif;
+        line-height: 1;
+        @include mq(pc) {
+          font-size: 4.5vw;
+        }
+        @include mq(tab) {
+          font-size: 9vw;
+          @include mq(beside) {
+            font-size: 8vw;
+          }
+        }
+        @include mq(sp) {
+          font-size: 9vw;
+          @include mq(beside) {
+            font-size: 6vw;
+          }
+        }
+      }
+      p {
+        margin: 0;
+        font-weight: bold;
+        margin-top: 2vw;
+      }
+      .btn {
+        background: $backgroundMainColor;
+        border-radius: 3px;
+        margin-top: 1.5vw;
+        a {
+          width: 100%;
+          padding: 10px 0;
+          color: #fff;
+          font-weight: bold;
+          text-align: center;
+          display: block;
+        }
+        @include mq(pc) {
+          border: 1px solid rgb(247, 239, 185);
+          box-sizing: border-box;
+          width: 300px;
+        }
+        @include mq(tab) {
+          border: 1px solid rgb(247, 239, 185);
+          box-sizing: border-box;
+          width: 300px;
+        }
+        @include mq(sp) {
+          border: 1px solid rgb(247, 239, 185);
+          box-sizing: border-box;
+          width: 46.5%;
+        }
+        &:hover {
+          cursor: pointer;
+          opacity: 0.7;
+        }
+      }
+    }
+  }
+  .right {
+    float: right;
+    background: $backgroundMainColor;
+    width: 50%;
+    height: 100vh;
+    p {
+      -webkit-transform: rotate(-90deg);
+      -moz-transform: rotate(-90deg);
+      transform: rotate(-90deg);
+      font-size: 29vh;
+      font-weight: 700;
+      position: absolute;
+      margin: auto;
+      bottom: 0;
+      color: #fff;
+      opacity: 0.2;
+      top: 0;
+      display: block;
+      right: -24vh;
+      height: fit-content;
+    }
+  }
+  .imagesBx {
+    width: 35%;
+    height: 24.5vw;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateY(-50%) translateX(-50%);
+    -webkit-transform: translateY(-50%) translateX(-50%);
+    @include mq(tab) {
+      width: 80%;
+      height: 56vw;
+      @include mq(beside) {
+        width: 50%;
+        height: 35vw;
+      }
+    }
+    @include mq(sp) {
+      width: 80%;
+      height: 54vw;
+      @include mq(beside) {
+        width: 54%;
+        height: 40vw;
+        margin: 0 auto;
+        text-align: center;
+      }
+    }
+  }
+}
