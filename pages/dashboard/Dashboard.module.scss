@@ -167,14 +167,25 @@
     }
     .categoryList{
         width: 100%;
-        overflow-x: scroll;
         padding: 0 0 10px 0;
         box-sizing: border-box;
+        @include mq(sp) {
+          overflow-x: scroll;
+          &::-webkit-scrollbar {
+            height: 3px;
+          }
+          &::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+          }
+          &::-webkit-scrollbar-thumb {
+            background: #fbd45b;
+            border-radius: 5px;
+          }
+        }
     .edit{
         list-style: none;
         padding: 0;
         overflow: hidden;
-        width: 450px;
         margin: 0;
         li{
             float:left;
