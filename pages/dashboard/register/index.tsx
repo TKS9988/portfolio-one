@@ -4,7 +4,7 @@ import React,{ useCallback, useEffect, useState } from 'react'
 import { SelectBox, TextBox } from '../../../components/dashboard/kit'
 import { db } from '../../../firebase/clientApp';
 import Box from '@mui/material/Box'
-import { collection, addDoc, setDoc, doc, query, onSnapshot, updateDoc,getDocs, getDoc,deleteDoc, where } from "firebase/firestore";
+import { collection, addDoc, setDoc, doc, query, onSnapshot, updateDoc,getDocs,deleteDoc, where } from "firebase/firestore";
 import { Images } from '../../../types/Types';
 import { DashboardLayout } from '../../../components/dashboard/dashboardLayout'
 import { ImageArea } from '../../../components/dashboard/kit'
@@ -115,12 +115,13 @@ const Register: React.FC = () => {
   const [addCategory, setAddCategory] = useState(false)
   const [editCategory, setEditCategory] = useState(false);
   const [detailCategory, setDetailCategory] = useState(false);
-  const [registerCategoryBx, setRegisterCategoryBx] = useState(false)
+  const [registerCategoryBx, setRegisterCategoryBx] = useState(false);
   const [nowCategoryName, setNowCategoryName] = useState<string>("");
-  const [nowCategoryId,setNowCategoryId] = useState<string>("")
   const [inAddNewCategoryName, setInAddNewCategoryName] = useState<string>("");
   const [inAddCategoryName, setInAddCategoryName] = useState<string>("");
   const [inAddCategoryId, setInAddCategoryId] = useState<string>("");
+  const [nowData, setNowData] = useState<any[]>([]);
+  
   const inputAddCategoryName = useCallback((event: any) => {
     setInAddCategoryName(event.target.value)
   }, [setInAddCategoryName])
@@ -136,9 +137,8 @@ const Register: React.FC = () => {
     setDetailCategory(false)
     setEditCategory(false) 
     setRegisterCategoryBx(false)
+    setNowData([]);
   }
-
-  const [nowData,setNowData] = useState<any[]>([])
 
   const addNewCategory = async(inAddNewCategoryName: string) => {
     const docRef = await addDoc(collection(db, "category"), {
@@ -175,6 +175,64 @@ const Register: React.FC = () => {
     })
   }
 
+  const nowCategorySubCollectionDelete = async (data,inAddCategoryId, nowCategoryName) => {
+    for (let i = 0; i < data.length; i++){
+      await deleteDoc(doc(db, "category", inAddCategoryId, nowCategoryName, data[i].id));
+      if (i === data.length - 1) {
+        console.log('SubCollection delete complete')
+      }
+    }
+  }
+
+  const getNowCategoryCollectionData = async(inAddCategoryId, nowCategoryName) => {
+    const querySnapshot = await getDocs(collection(db, "category", inAddCategoryId, nowCategoryName));
+    const data = [];
+      querySnapshot.forEach((doc) => {
+        data.push(doc.data());
+      });
+      nowCategorySubCollectionDelete(data, inAddCategoryId, nowCategoryName)
+  }
+
+  const [innerCategoryData, setInnerCategoryData] = useState<any[]>([])  
+  const changeCategoryData = async (innerCategoryData,inAddCategoryId, inAddCategoryName,nowCategoryName) => {
+    for (let i = 0; i < innerCategoryData.length; i++){
+      await setDoc(doc(db, "category", inAddCategoryId, inAddCategoryName, innerCategoryData[i].id), innerCategoryData[i]);
+      if (i === innerCategoryData.length - 1) {
+        console.log('create new sub collection!')
+        getNowCategoryCollectionData(inAddCategoryId, nowCategoryName)
+      }
+    } 
+  }
+
+  useEffect(() => {
+    (async () => {
+      const q = query(collection(db, "menu"), where("category", "==", nowCategoryName));
+      const querySnapshot = await getDocs(q);
+      const data = [];
+      querySnapshot.forEach((doc) => {
+        let item = doc.data();
+        item.id = doc.id;
+        data.push(item);
+      });
+      setInnerCategoryData(data)
+    })()
+  },[nowCategoryName])
+
+  const registerMenu = (nowData, inAddCategoryName, nowCategoryName) => {
+    const data = nowData.filter(item => item.data.category === nowCategoryName);
+    for (let i = 0; i < data.length; i++) {
+      const menuCollectionRef = doc(db, "menu", data[i].id);
+      updateDoc(menuCollectionRef, {
+        category: inAddCategoryName
+      });
+      if (i === data.length - 1) {
+        changeCategoryData(innerCategoryData,inAddCategoryId, inAddCategoryName,nowCategoryName)
+        alert('このカテゴリーに登録されているすべての商品情報も変更されています。')
+        closeBtn()
+      }
+    }
+  }
+
   const getNowCategoryData = async (nowCategoryName: string) => {
     const q = query(collection(db, "menu"), where("category", "==", nowCategoryName));
     const data:any[] = [];
@@ -194,30 +252,18 @@ const Register: React.FC = () => {
     setNowData(data)
   }
 
-  const changeCategoryData = (nowData) => {
-    for (let i = 0; i < nowData.length; i++) {
-      const menuCollectionRef = doc(db, "menu", nowData[i].id);
-      updateDoc(menuCollectionRef, {
-        category: inAddCategoryName
-      });
-      if (i === nowData.length - 1) {
-        alert('このカテゴリーに登録されているすべての商品情報も変更されています。')
-      }
-    }
-  }
-
   const registerCategory = async(inAddCategoryId: string,inAddCategoryName: string) => {
     const categoryRef = doc(db, "category", inAddCategoryId);
     await updateDoc(categoryRef, {
       name: inAddCategoryName
     }).then(async() => {
-      changeCategoryData(nowData)
-      closeBtn()
+      registerMenu(nowData, inAddCategoryName,nowCategoryName)
       alert('登録が完了しました。')
     }).catch(() => {
       alert('登録が失敗しました。')
     })
   }
+
   const DetailCategoryBx = () => {
     return (
       <div className={Styles.addCategoryBx}>
@@ -235,6 +281,7 @@ const Register: React.FC = () => {
     </div>
     )
   }
+
   const EditCategoryList = () => {
     return (
       <div className={Styles.addCategoryBx}>
@@ -243,7 +290,7 @@ const Register: React.FC = () => {
             <ul className={Styles.categoryList}>
               {categories.length > 0 && (
                 categories.map((list, index) => (
-                  <li key={index} onClick={() => { setDetailCategory(true); setEditCategory(false); setInAddCategoryName(list.name); setInAddCategoryId(list.categoryId); setNowCategoryName(list.name); setNowCategoryId(list.categoryId); getNowCategoryData(nowCategoryName);  getMenuData()}}>{list.name}</li>
+                  <li key={index} onClick={() => { setDetailCategory(true); setEditCategory(false); setInAddCategoryName(list.name); setInAddCategoryId(list.categoryId); setNowCategoryName(list.name); getNowCategoryData(nowCategoryName); getMenuData(); }}>{list.name}</li>
                 ))
               )}
             </ul>
@@ -252,6 +299,7 @@ const Register: React.FC = () => {
       </div>
     )
   }
+
   const AddCategoryBx = () => {
     return (
       <div className={Styles.addCategoryBx}>
@@ -266,7 +314,6 @@ const Register: React.FC = () => {
     </div>
     )
   }
-
 
   return (
     <DashboardLayout>

@@ -98,7 +98,7 @@ const Product = ({ edit }) => {
           setPrice(data.price);
           setImages([data.images]);
           setCategory(data.category);
-          setThumbnail(data.images.path)
+          setThumbnail(data.images?.path)
         } else {
           console.log("404");
         }

@@ -166,9 +166,9 @@
         }
     }
     .categoryList{
-        width: 100%;
         padding: 0 0 10px 0;
         box-sizing: border-box;
+        width: 100%;
         @include mq(sp) {
           overflow-x: scroll;
           &::-webkit-scrollbar {
@@ -187,6 +187,16 @@
         padding: 0;
         overflow: hidden;
         margin: 0;
+        display: flex;
+        @include mq(pc){
+            width: 100%;
+        }
+        @include mq(tab){
+            width: 100%;
+        }
+        @include mq(sp){
+            width: 450px;
+        }
         li{
             float:left;
             background: #fbd45b;
@@ -218,6 +228,11 @@
 }
     .categoryBx{
         margin-bottom:2%;
+        .itemBx{
+            width: 200px;
+            border: 1px solid #ddd;
+            box-sizing: border-box;
+        }
         .productListBx{
             overflow:hidden;
             padding:0;
