@@ -12,10 +12,12 @@
 
 ## 使い方
 
-「ユーザー画面」
+「ユーザー画面」(https://hamburger-tsx-v9-frhn5dir2-lib-georgia.vercel.app/)
 
 
-※管理画面修正中
+「管理画面」(https://hamburger-tsx-v9-frhn5dir2-lib-georgia.vercel.app/dashboard/signin)  
+test@gmail.com  
+123456
 
 ## ライセンス
 
