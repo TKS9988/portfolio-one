@@ -17,6 +17,7 @@ const Menu: React.FC<Props> = (props) => {
   const [counter, setCounter] = useState(1);
   const images = Drink;
 
+  console.log(viewData)
   useEffect(() => {
     const data = [];
     for (let i = 0; i < categoryData.length; i++){

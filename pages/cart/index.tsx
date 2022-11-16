@@ -99,6 +99,7 @@ const Cart: React.FC<Style> = () => {
   const [addOrder, setAddOrder] = useState <AddOrder | null>(null);
   const [paymentLoad, setPaymentLoad] = useState<boolean>(false);
 
+  console.log(addOrder)
   useEffect(() => {
     function order() {
       if (cartItem) {

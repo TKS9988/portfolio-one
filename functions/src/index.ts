@@ -1,7 +1,6 @@
-import * as functions from "firebase-functions";
-import * as admin from "firebase-admin";
+const functions = require('firebase-functions');
+const admin = require('firebase-admin');
 const serviceAccount = require("./serviceAccountKey.json");
-
 const cors = require('cors');
 import Stripe from 'stripe';
 const stripe = new Stripe('STRIPE_SECRET_KEY' , { apiVersion: '2022-08-01' });
@@ -21,75 +20,70 @@ const sendResponse = (response:any, statusCode:number, body:any) => {
 
 const db = admin.firestore();
 
-exports.getCategoryData = functions.https.onRequest(async (request, response) => {
-  try {
-    const categoryRef = await db.collection('category').get();
+exports.getCategoryData = functions.https.onRequest((request:any, response:any) => {
+  const categoryRef = db.collection('category').get();
     if (categoryRef) {
-      db.collection('category').get().then((query) => {
-        console.log(query.docs.map((doc) => doc.id))
-        const categoryData: any = [];
-        query.forEach((doc) => {
-          let data = doc.data();
-          data.categoryId = doc.id;
-          categoryData.push(data)
-        })
-        response.status(200).json(categoryData)
-      }).catch((e) => {
-        console.error(e);
-        response.status(500).send(e);
-      });
-    } else {
-      response.status(500).send('error categoryRef');
-    }
-  } catch (e) {
-    console.error(e);
-    response.status(500).send(e);
-  }
-});
-
-exports.getMenuData = functions.https.onRequest(async (request, response) => {
-  try {
-    const menuRef = await db.collection("menu").get();
-    if (menuRef) {
-      db.collection("menu").get().then((query) => {
-        console.log(query.docs.map((doc) => doc.id))
-        const menuData:any = [];
-        query.forEach((doc) => {
-          let data = doc.data();
-          data.id = doc.id;
-          menuData.push(data)
-        })
-        response.status(200).json(menuData)
-      }).catch((e) => {
-            console.error(e);
-            response.status(500).send(e);
+      db.collection('category').get().then((query:any) => {
+          const categoryData: any = [];
+          query.forEach((doc:any) => {
+            let data = doc.data();
+            data.categoryId = doc.id;
+            categoryData.push(data)
           });
-      } else {
-        response.status(500).send('error menuRef');
-      }
-  } catch (e) {
-      console.error(e);
-      response.status(500).send(e);
-  }
+          response.status(200).json(categoryData)
+        })
+        .catch((error:any) => {
+          response.send(error);
+          response.status(500).send(error);
+        });
+    } else {
+      const categoryData: any[] = [];
+      response.status(200).json(categoryData)
+    }
 });
 
-exports.stripePaymentMethods = functions.https.onRequest((req, res) => {
+exports.getMenuData = functions.https.onRequest((request:any, response:any) => {
+  const menuRef = db.collection('menu').get();
+    if (menuRef) {
+      db.collection('menu').get().then((query:any) => {
+          const menuData: any[] = [];
+          query.forEach((doc:any) => {
+            let data = doc.data();
+            data.id = doc.id;
+            menuData.push(data)
+          });
+          response.status(200).json(menuData)
+        })
+        .catch((error:any) => {
+          response.send(error);
+          response.status(500).send(error);
+        });
+    } else {
+      const menuData: any[] = [];
+      response.status(200).json(menuData)
+    }
+});
+
+exports.stripePaymentMethods = functions.https.onRequest((req:any, res:any) => {
   const corsHandler = cors({ origin: true });
   corsHandler(req, res, () => {
-      if (req.method !== 'POST') {
-          sendResponse(res, 405, { error: "Invalid Request" })
-      }
-      return stripe.paymentIntents.create({
-          amount:req.body.amount,
-          currency: "JPY",
-          description: "Tbilisi Burger",
-          payment_method: req.body.id,
-          confirm: true
-      }).then(() => {
-          sendResponse(res, 200, {confirm: "completed"});
-      }).catch((error) => {
-          console.error(error);
-          sendResponse(res, 500, { error: error })
+    if (req.method !== 'POST') {
+      sendResponse(res, 405, { error: 'Invalid Request' });
+    }
+    return stripe.paymentIntents
+      .create({
+        amount: req.body.amount,
+        currency: 'JPY',
+        description: 'Tbilisi Burger',
+        payment_method: req.body.id,
+        confirm: true,
       })
-  })
-})
+      .then(() => {
+        sendResponse(res, 200, { confirm: 'completed' });
+      })
+      .catch((error) => {
+        console.error(error);
+        sendResponse(res, 500, { error: error });
+      });
+  });
+});
