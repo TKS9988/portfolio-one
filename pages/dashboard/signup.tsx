@@ -4,9 +4,9 @@ import Link from "next/link";
 import Router from "next/router";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { isValidEmailFormat } from "../../lib/validation";
-import logo from '../../../assets/images/logo2.png'
+import logo from '../../assets/images/logo2.png'
 import { auth } from "../../firebase/clientApp";
-import styles from '../Sign.module.scss';
+import styles from './Sign.module.scss';
 import { doc, setDoc } from "firebase/firestore"; 
 import { db } from '../../firebase/clientApp';
 const SignUp = () => {
@@ -14,10 +14,9 @@ const SignUp = () => {
   [email, setEmail] = useState(""),
   [password, setPassword] = useState(""),
   [confirmPassword, setConfirmPassword] = useState("");
-
-const inputName = useCallback((event) => { setName(event.target.value) }, [setName]);
-const inputEmail = useCallback((event) => { setEmail(event.target.value) }, [setEmail]);
-const inputPassword = useCallback((event) => { setPassword(event.target.value) }, [setPassword]); 
+  const inputName = useCallback((event) => { setName(event.target.value) }, [setName]);
+  const inputEmail = useCallback((event) => { setEmail(event.target.value) }, [setEmail]);
+  const inputPassword = useCallback((event) => { setPassword(event.target.value) }, [setPassword]); 
   const inputConfirmPassword = useCallback((event) => { setConfirmPassword(event.target.value) }, [setConfirmPassword]);
   
   const toSignUp = (name: string,email: string,password: string,confirmPassword: string) => {

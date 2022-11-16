@@ -37,6 +37,7 @@ const Detail: React.FC<Props> = (props) => {
     const dataName = sourceStr.replace(/show/g, '').slice(0, 1).toLowerCase() + sourceStr.replace(/show/g, '').slice(1);
     const filteredusers = dataSet.filter(data => data.name === dataName)
     setData(filteredusers[0].data)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [booleanState]);
 
   const closeBtn = () => {
