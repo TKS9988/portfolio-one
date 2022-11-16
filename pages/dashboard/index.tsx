@@ -256,7 +256,7 @@ const Dashboard: React.FC<Props> = (props) => {
             <ul>
               <ShowData showInner={showInner} />
             </ul>
-            <div className={Styles.closeBtn} onClick={() => { setShowMoreList(false); setShowTitle(''); setShowInner([])}}>close</div>
+            <div className={Styles.closeBtn} onClick={() => { setShowMoreList(false); setShowTitle(''); setShowInner([])}}>閉じる</div>
           </div>
         </div>
       ) : (

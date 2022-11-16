@@ -33,7 +33,7 @@ const HeadSettings: React.FC = () => {
 
   return (
     <Head>
-      <title>Tbilisi Burger&nbsp;|&nbsp;{titles()}</title>
+      <title>{`Tbilisi Burger | ${titles()}`}</title>
       <meta name="description" content={descriptionContents()} />
       <link rel="icon" href="/favicon.ico" />
       <link href="https://fonts.googleapis.com/css2?family=Paytone+One&display=swap" rel="stylesheet" />
