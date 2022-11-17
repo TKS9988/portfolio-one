@@ -276,7 +276,7 @@ const Sales:React.FC<Props> = (props) => {
     <DashboardLayout>
       <div className={Styles.inner}>
         <h2>販売数</h2>
-        <ul className={Styles.orderTabBtn}>
+        <ul className={Styles.salesTabBtn}>
           <li className={choiceToday ? Styles.choiceToday : ""} onClick={() => { setTodaySales(true); setMonthSales(false); setSearchSales(false); setChoiceToday(true); setChoiceMonth(false); setChoiceSearch(false) }}>今日</li>
           <li className={choiceMonth ? Styles.choiceMonth : ""} onClick={() => { setTodaySales(false); setMonthSales(true); setSearchSales(false); setChoiceToday(false);setChoiceMonth(true);setChoiceSearch(false)}}>今月</li>
           <li className={choiceSearch ? Styles.choiceSearch : ""} onClick={() => { setTodaySales(false); setMonthSales(false); setSearchSales(true); setChoiceToday(false);setChoiceMonth(false);setChoiceSearch(true)}}>検索</li>

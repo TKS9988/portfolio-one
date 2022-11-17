@@ -291,7 +291,8 @@
             }
         }
     }
-    .orderTabBtn{
+    .salesTabBtn{display:flex;}
+    .orderTabBtn,.salesTabBtn{
         list-style: none;
         overflow:hidden;
         padding: 0;
@@ -334,8 +335,14 @@
             @include mq(sp){
                 float:none;
             }
-        }    
+        }
     }
+    .salesTabBtn li{
+        width: 32%!important;float:none!important;
+    }
+    .salesTabBtn li:nth-child(2){
+        margin:0 auto
+    };
     .salesList{
         margin-top:35px;
         p{
@@ -941,7 +948,6 @@
     left: 0;
     z-index: 9999999;
     background: rgba(0,0,0,0.7);
-    height: 100vw;
     .showMoreListInner{
         position: fixed;
         margin: 0 auto;
