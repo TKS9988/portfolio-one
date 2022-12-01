@@ -21,7 +21,7 @@
     "@types/react": "^18.0.19",
     "chart.js": "^3.9.1",
     "chartjs-plugin-doughnut-innertext": "^3.1.0",
-    "firebase": "^9.9.4",
+    "firebase": "^9.14.0",
     "firebase-admin": "^11.2.1",
     "firebase-functions": "^4.0.2",
     "image-validator": "^1.2.1",
