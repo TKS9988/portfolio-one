@@ -16,7 +16,8 @@
 
 
 [管理画面](https://hamburger-tsx-v9-frhn5dir2-lib-georgia.vercel.app/dashboard/signin)  
-
+メールアドレス：testアットマークtest.test
+パスワード：123456
 
 ## ライセンス
 
