@@ -15,10 +15,10 @@
 [ユーザー画面](https://portfolio-hamburger-d9ky.vercel.app/)
 
 
-[管理画面](https://portfolio-hamburger-d9ky.vercel.app/dashboard/signin)  
-メールアドレス：testアットマークtest.test
-パスワード：123456
-カード：4242424242424242 04/44 444 44444
+[管理画面](https://portfolio-hamburger-d9ky.vercel.app/dashboard/signin)    
+メールアドレス：testアットマークtest.test  
+パスワード：123456  
+カード：4242424242424242 04/44 444 44444  
 
 ## ライセンス
 
